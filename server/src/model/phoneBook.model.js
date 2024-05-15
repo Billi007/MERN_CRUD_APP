@@ -13,4 +13,4 @@ const phoneBookSchema = new Schema({
 
 },{timestamps: true})
 
-const phone = mongoose.model("phone" , phoneBookSchema)
+export const Phone = mongoose.model("phone" , phoneBookSchema)
