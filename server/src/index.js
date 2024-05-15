@@ -1,27 +1,8 @@
 import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-import cors from 'cors'
 import DB_NAME from './constants.js'
-import express from 'express'
-const app = express()
+import app from './app.js'
 
-dotenv.config({
-    path: './.env'
-})
-
-app.use(cors({
-    origin: process.env.ORS_ORIGIN,
-    credentials: true
-}))
-
-app.use(express.urlencoded({
-    extended: true,
-    limit: "16kb"
-}))
-app.use(express.json({
-    limit: "16kb"
-}))
-
+//connecting mongodb
 const connectDB = async () => {
    try {
      const connectionInstance = await mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`)
@@ -42,7 +23,3 @@ connectDB()
 .catch(() => {
     console.log("MONGODB CONNECTION FAILED !!! ", error)
 })
-//localhost = localhost:5000/add-phone
-//import routes
-import router from './routes/phone.routes.js'
-app.use('/api/v1/phone', router)
